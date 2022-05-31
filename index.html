@@ -1,0 +1,56 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+    </style>
+</head>
+<body>
+    <button>Throttler</button>
+</body>
+</html>
+
+<script>
+
+
+const callback = () => {
+
+    console.log(" Callback Function called by  throttler");
+
+}
+
+function throttler(fn,delaytime){
+    console.log('delaytime:', delaytime)
+    console.log('fn', fn)
+
+    let last = 0;
+
+    return (...args) => {
+        const now = new Date().getTime();
+        console.log('now:', now)
+
+        if(now - last < delaytime) {
+            return; 
+        }
+        last = now;
+        console.log('...args:', ...args)
+
+        return fn(...args)
+    }
+}
+
+document.querySelector("button").addEventListener("click",throttler((event) => {
+    callback();
+},5000))
+
+
+
+
+
+</script>
